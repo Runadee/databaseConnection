@@ -19,6 +19,7 @@ public class UserView extends JFrame {
     private JButton button_user_new;
     private UserController userController;
     private DefaultTableModel model_user;
+    private JPopupMenu user_popup;
 
     public UserView() {
         this.add(container);
@@ -32,6 +33,7 @@ public class UserView extends JFrame {
 
         this.userController = new UserController();
         this.model_user = new DefaultTableModel();
+        this.user_popup = new JPopupMenu();
 
         // TableModel  (tabloya verileri işlemek için )
         // Column başlıkları oluştur
@@ -66,6 +68,17 @@ public class UserView extends JFrame {
                 table_user.setRowSelectionInterval(selectedRow, selectedRow);
             }
         });
+
+        this.user_popup.add("Update").addActionListener(e -> {
+            int selectedId = Integer.parseInt(table_user.getValueAt(table_user.getSelectedRow(), 0).toString());
+            System.out.println(selectedId);
+        });
+        this.user_popup.add("Delete").addActionListener(e -> {
+            int selectedId = Integer.parseInt(table_user.getValueAt(table_user.getSelectedRow(), 0).toString());
+            System.out.println(selectedId);
+        });
+
+        this.table_user.setComponentPopupMenu(user_popup);
 
     }
 }
