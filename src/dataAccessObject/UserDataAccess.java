@@ -4,6 +4,7 @@ import core.Database;
 import entity.User;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -39,4 +40,34 @@ public class UserDataAccess {
 
         return users;
     }
+
+    public User getById(int id) {
+
+        User user = new User();
+
+        String query = "SELECT * FROM public.user WHERE id = ?";
+
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setMail(resultSet.getString("mail"));
+                user.setPassword(resultSet.getString("password"));
+                user.setType(User.Type.valueOf(resultSet.getString("type")));
+                user.setGender(User.Gender.valueOf(resultSet.getString("gender")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
+
+
 }

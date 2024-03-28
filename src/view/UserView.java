@@ -23,7 +23,7 @@ public class UserView extends JFrame {
 
     public UserView() {
         this.add(container);
-        this.setTitle("Kullanıcı Yönetimi");
+        this.setTitle("Client Management");
         this.setSize(500, 500);
         int x = (Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2;
         int y = (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2;
@@ -71,11 +71,13 @@ public class UserView extends JFrame {
 
         this.user_popup.add("Update").addActionListener(e -> {
             int selectedId = Integer.parseInt(table_user.getValueAt(table_user.getSelectedRow(), 0).toString());
-            System.out.println(selectedId);
+            User selectedUser = this.userController.getById(selectedId);
+
         });
         this.user_popup.add("Delete").addActionListener(e -> {
             int selectedId = Integer.parseInt(table_user.getValueAt(table_user.getSelectedRow(), 0).toString());
-            System.out.println(selectedId);
+           // User selectedUser = this.userController.getById(selectedId);
+
         });
 
         this.table_user.setComponentPopupMenu(user_popup);
