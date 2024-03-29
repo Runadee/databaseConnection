@@ -6,6 +6,8 @@ import entity.User;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -72,6 +74,7 @@ public class UserView extends JFrame {
         this.user_popup.add("Update").addActionListener(e -> {
             int selectedId = Integer.parseInt(table_user.getValueAt(table_user.getSelectedRow(), 0).toString());
             User selectedUser = this.userController.getById(selectedId);
+            EditView editView = new EditView(selectedUser);
 
         });
         this.user_popup.add("Delete").addActionListener(e -> {
@@ -82,5 +85,8 @@ public class UserView extends JFrame {
 
         this.table_user.setComponentPopupMenu(user_popup);
 
+        button_user_new.addActionListener(e -> {
+            EditView editView = new EditView(new User());
+        });
     }
 }

@@ -25,4 +25,21 @@ public class UserController {
 
         return this.userDataAccess.getById(id);
     }
+
+    public boolean update(User user) {
+
+        User checkUser = this.getById(user.getId());
+
+        if (checkUser == null || checkUser.getId() == 0) {
+            return false;
+        }
+        return this.userDataAccess.update(user);
+    }
+
+    public boolean save(User user) {
+        return this.userDataAccess.save(user);
+    }
+
+
+
 }
