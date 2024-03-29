@@ -19,6 +19,7 @@ public class UserView extends JFrame {
     private JTable table_user;
     private JScrollPane scroll_user;
     private JButton button_user_new;
+    private JButton delete_button;
     private UserController userController;
     private DefaultTableModel model_user;
     private JPopupMenu user_popup;
@@ -77,9 +78,23 @@ public class UserView extends JFrame {
             EditView editView = new EditView(selectedUser);
 
         });
+
         this.user_popup.add("Delete").addActionListener(e -> {
             int selectedId = Integer.parseInt(table_user.getValueAt(table_user.getSelectedRow(), 0).toString());
-           // User selectedUser = this.userController.getById(selectedId);
+            User selectedUser = this.userController.getById(selectedId);
+
+            if (selectedUser.getId() != 0) {
+
+                if (this.userController.delete(selectedUser)) {
+                    JOptionPane.showMessageDialog(UserView.this,"Client successfully deleted");
+
+                    model_user.removeRow(table_user.getSelectedRow());
+                } else {
+                    JOptionPane.showMessageDialog(UserView.this,"An error occurred while deleting the user");
+                }
+            } else {
+                JOptionPane.showMessageDialog(UserView.this, "Please choose the  client that you cant to Delete");
+            }
 
         });
 
@@ -88,5 +103,6 @@ public class UserView extends JFrame {
         button_user_new.addActionListener(e -> {
             EditView editView = new EditView(new User());
         });
+
     }
 }

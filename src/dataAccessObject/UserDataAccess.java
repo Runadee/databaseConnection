@@ -108,6 +108,23 @@ public class UserDataAccess {
     }
 
 
+    public boolean delete(User user) {
+        String query = "DELETE FROM public.user WHERE id = ?";
+
+        try {
+
+            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1,user.getId());
+
+            return preparedStatement.executeUpdate() != -1;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 
 
 }

@@ -101,6 +101,8 @@ public class EditView extends JFrame {
 
                         dispose();
                     }
+
+
                 } else {
                     if (this.userController.save(this.user)) {
                         JOptionPane.showMessageDialog(null,
@@ -115,5 +117,7 @@ public class EditView extends JFrame {
             }
 
         });
+
+
     }
 }

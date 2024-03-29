@@ -41,5 +41,9 @@ public class UserController {
     }
 
 
+    public boolean delete(User user) {
+        return this.userDataAccess.delete(user);
+    }
+
 
 }
